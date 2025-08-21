@@ -1,0 +1,573 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Cake Categories | Sweet Delights</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+    <link rel="stylesheet" href="css/style.css">
+    <style>
+        /* Hero section styling */
+        .hero.hero-section {
+            position: relative;
+            background-image: url('Images/cover.png');
+            background-size: cover;
+            background-position: center;
+            background-repeat: no-repeat;
+            min-height: 80vh;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: var(--light-color, #fff);
+            text-align: center;
+            padding: 5rem 0;
+            margin-bottom: 2rem;
+            border-radius: 20px;
+            animation: slideUp 1s ease-out;
+        }
+
+        .hero.hero-section::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(0, 0, 0, 0.5);
+            border-radius: 20px;
+            z-index: 1;
+        }
+
+        .container {
+            position: relative;
+            z-index: 2;
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 20px;
+        }
+
+        .hero-content {
+            max-width: 600px;
+            text-shadow: 0 2px 4px rgba(0, 0, 0, 0.5);
+        }
+
+        .hero-content h1 {
+            font-size: 2.5rem;
+            margin-bottom: 1rem;
+            line-height: 1.2;
+        }
+
+        .hero-content p {
+            font-size: 1.2rem;
+            margin-bottom: 1.5rem;
+        }
+
+        .btn {
+            display: inline-block;
+            padding: 10px 20px;
+            background:  #ff6b6b;
+            color: #fff;
+            text-decoration: none;
+            border-radius: 5px;
+            transition: background 0.3s, transform 0.2s;
+        }
+
+        .btn:hover {
+            background:  #ff6b6b;
+            transform: translateY(-2px);
+        }
+
+        @keyframes slideUp {
+            from { opacity: 0; transform: translateY(50px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+
+        /* Cart and Modal Styling */
+        .cart-icon {
+            position: relative;
+            color: #2C2F38;
+            font-size: 1.5rem;
+            cursor: pointer;
+        }
+
+        .cart-count {
+            position: absolute;
+            top: -10px;
+            right: -10px;
+            background: #D4A5A5;
+            color: #fff;
+            border-radius: 50%;
+            width: 20px;
+            height: 20px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 0.9rem;
+        }
+
+        #cartModal {
+            display: none;
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(0, 0, 0, 0.5);
+            z-index: 1000;
+        }
+
+        .modal-content {
+            background: #F5F5F5;
+            margin: 5% auto;
+            padding: 20px;
+            border-radius: 10px;
+            width: 90%;
+            max-width: 500px;
+            color: #2C2F38;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+            position: relative;
+        }
+
+        .modal-content h2 {
+            font-size: 1.8rem;
+            margin-bottom: 1rem;
+            color: #2C2F38;
+        }
+
+        .cart-items {
+            max-height: 300px;
+            overflow-y: auto;
+        }
+
+        .cart-item {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 10px 0;
+            border-bottom: 1px solid #D4A5A5;
+        }
+
+        .cart-item img {
+            width: 50px;
+            height: 50px;
+            object-fit: cover;
+            border-radius: 5px;
+            margin-right: 10px;
+        }
+
+        .remove-item {
+            background: #D4A5A5;
+            color: #fff;
+            border: none;
+            padding: 5px 10px;
+            border-radius: 5px;
+            cursor: pointer;
+        }
+
+        .remove-item:hover {
+            background: #C38A8A;
+        }
+
+        .modal-actions {
+            margin-top: 20px;
+            text-align: right;
+        }
+
+        .modal-actions .btn {
+            margin-left: 10px;
+        }
+
+        /* Enhanced Add to Cart Button */
+        .cake-card .add-to-cart {
+            background: linear-gradient(90deg,  #ff6b6b 0%,  #ff6b6b 100%);
+            color: #fff;
+            border: none;
+            padding: 10px 20px;
+            border-radius: 25px;
+            cursor: pointer;
+            font-weight: bold;
+            box-shadow: 0 4px 6px  #ff6b6b;;
+            transition: transform 0.3s, box-shadow 0.3s;
+        }
+
+        .cake-card .add-to-cart:hover {
+            transform: scale(1.05);
+            box-shadow: 0 6px 12px  #ff6b6b;;
+        }
+
+        /* Add to Cart and Checkout Messages */
+        #addToCartMessage, #checkoutMessage {
+            display: none;
+            position: fixed;
+            top: 20px;
+            left: 50%;
+            transform: translateX(-50%);
+            background: #D4A5A5;
+            color: #fff;
+            padding: 15px 25px;
+            border-radius: 5px;
+            z-index: 2000;
+            box-shadow: 0 2px 4px rgba(0, 0, 0, 0.2);
+            text-align: center;
+            max-width: 400px;
+            animation: fadeInOut 5s ease-out forwards; /* 5s for checkout to allow reading */
+        }
+
+        @keyframes fadeInOut {
+            0% { opacity: 0; }
+            10% { opacity: 1; }
+            90% { opacity: 1; }
+            100% { opacity: 0; }
+        }
+
+        @media (max-width: 768px) {
+            .hero.hero-section {
+                min-height: 60vh;
+                padding: 3rem 0;
+            }
+            .hero-content h1 {
+                font-size: 1.8rem;
+            }
+            .hero-content p {
+                font-size: 1rem;
+            }
+            .hero-content {
+                padding: 0 20px;
+            }
+            .modal-content {
+                width: 95%;
+            }
+            .cake-card .add-to-cart {
+                padding: 8px 15px;
+            }
+            #addToCartMessage, #checkoutMessage {
+                max-width: 90%;
+                padding: 10px 15px;
+            }
+        }
+    </style>
+</head>
+<body>
+    <!-- Navigation -->
+    <nav class="navbar">
+        <div class="container">
+            <a href="index.html" class="logo">Sweet<span>Delights</span></a>
+            <ul class="nav-links">
+                <li><a href="index.html">Home</a></li>
+                <li><a href="categories.html" class="active">Categories</a></li>
+                <li><a href="services.html">Services</a></li>
+                <li><a href="about.html">About Us</a></li>
+                <li><a href="contact.html">Contact</a></li>
+                <li><a href="#" class="cart-icon" id="cartIcon"><i class="fas fa-shopping-cart"></i><span class="cart-count" id="cartCount">0</span></a></li>
+            </ul>
+            <div class="hamburger">
+                <span></span>
+                <span></span>
+                <span></span>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Hero Section -->
+    <section class="hero hero-section">
+        <div class="container">
+            <div class="hero-content">
+                <h1>Explore Our Cake Categories</h1>
+                <p>Discover a wide range of delicious cakes for every occasion</p>
+                <a href="#categoryCakes" class="btn">Browse Categories</a>
+            </div>
+        </div>
+    </section>
+
+    <!-- Category Filter -->
+    <section class="category-filter">
+        <div class="container">
+            <div class="filter-controls">
+                <button class="filter-btn active" data-filter="all">All</button>
+                <button class="filter-btn" data-filter="birthday">Birthday</button>
+                <button class="filter-btn" data-filter="wedding">Wedding</button>
+                <button class="filter-btn" data-filter="cupcakes">Cupcakes</button>
+                <button class="filter-btn" data-filter="desserts">Desserts</button>
+                <button class="filter-btn" data-filter="seasonal">Seasonal</button>
+            </div>
+            <div class="search-box">
+                <input type="text" placeholder="Search cakes..." id="searchInput">
+                <button><i class="fas fa-search"></i></button>
+            </div>
+        </div>
+    </section>
+
+    <!-- Cake Categories -->
+    <section class="cake-categories">
+        <div class="container">
+            <div class="cake-grid" id="categoryCakes">
+                <!-- Birthday Cakes -->
+                <div class="cake-card birthday" data-category="birthday">
+                    <div class="cake-img">
+                        <img src="images/birthday_cake.jpg" alt="Colorful birthday cake with candles">
+                    </div>
+                    <div class="cake-info">
+                        <h3>Birthday Bliss</h3>
+                        <p>Colorful and fun cakes perfect for any birthday celebration</p>
+                        <div class="cake-price">
+                            <span class="price">$45+</span>
+                            <button class="add-to-cart" data-name="Birthday Bliss" data-price="45"><i class="fas fa-shopping-cart"></i></button>
+                        </div>
+                    </div>
+                </div>
+                
+                <!-- Wedding Cakes -->
+                <div class="cake-card wedding" data-category="wedding">
+                    <div class="cake-img">
+                        <img src="images/wedding-cake.jpeg" alt="Elegant three-tier wedding cake">
+                    </div>
+                    <div class="cake-info">
+                        <h3>Elegant Wedding</h3>
+                        <p>Beautiful tiered cakes for your special day</p>
+                        <div class="cake-price">
+                            <span class="price">$200+</span>
+                            <button class="add-to-cart" data-name="Elegant Wedding" data-price="200"><i class="fas fa-shopping-cart"></i></button>
+                        </div>
+                    </div>
+                </div>
+                
+                <!-- Cupcakes -->
+                <div class="cake-card cupcakes" data-category="cupcakes">
+                    <div class="cake-img">
+                        <img src="images/cupcakes.jpg" alt="Assorted decorated cupcakes">
+                    </div>
+                    <div class="cake-info">
+                        <h3>Delightful Desserts</h3>
+                        <p>Perfect individual treats for any occasion</p>
+                        <div class="cake-price">
+                            <span class="price">$25/dozen</span>
+                            <button class="add-to-cart" data-name="Delightful Desserts" data-price="25"><i class="fas fa-shopping-cart"></i></button>
+                        </div>
+                    </div>
+                </div>
+                
+                <!-- Desserts -->
+                <div class="cake-card desserts" data-category="desserts">
+                    <div class="cake-img">
+                        <img src="images/desserts.jpg" alt="Assorted delicious desserts">
+                    </div>
+                    <div class="cake-info">
+                        <h3>Decadent Desserts</h3>
+                        <p>Sweet treats including cheesecakes, mousses, and more</p>
+                        <div class="cake-price">
+                            <span class="price">$8+ each</span>
+                            <button class="add-to-cart" data-name="Decadent Desserts" data-price="8"><i class="fas fa-shopping-cart"></i></button>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Seasonal Cakes -->
+                <div class="cake-card seasonal" data-category="seasonal">
+                    <div class="cake-img">
+                        <img src="images/seasonal_cakes.jpg" alt="Seasonal themed cake">
+                    </div>
+                    <div class="cake-info">
+                        <h3>Seasonal Specials</h3>
+                        <p>Festive cakes for holidays and special occasions</p>
+                        <div class="cake-price">
+                            <span class="price">$55+</span>
+                            <button class="add-to-cart" data-name="Seasonal Specials" data-price="55"><i class="fas fa-shopping-cart"></i></button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Cake Details Modal -->
+    <div class="modal" id="cakeModal">
+        <div class="modal-content">
+            <span class="close-modal">×</span>
+            <div class="modal-body">
+                <!-- Dynamic content loaded via JavaScript -->
+            </div>
+        </div>
+    </div>
+
+    <!-- Cart Modal -->
+    <div id="cartModal">
+        <div class="modal-content">
+            <h2>Your Cart</h2>
+            <div class="cart-items" id="cartItems"></div>
+            <div class="modal-actions">
+                <p>Total: $<span id="cartTotal">0.00</span></p>
+                <button class="btn" id="clearCart">Clear Cart</button>
+                <button class="btn" id="checkout">Checkout</button>
+            </div>
+        </div>
+    </div>
+
+    <!-- Add to Cart and Checkout Messages -->
+    <div id="addToCartMessage"></div>
+    <div id="checkoutMessage"></div>
+<!-- Footer -->
+    <footer>
+        <div class="container">
+            <div class="footer-content">
+                <div class="footer-col">
+                    <h3>Sweet Delights</h3>
+                    <p>Artisan bakery creating beautiful, delicious cakes since 2010.</p>
+                    <div class="social-links">
+                        <a href="#"><i class="fab fa-facebook-f"></i></a>
+                        <a href="#"><i class="fab fa-instagram"></i></a>
+                        <a href="#"><i class="fab fa-twitter"></i></a>
+                        <a href="#"><i class="fab fa-pinterest-p"></i></a>
+                    </div>
+                </div>
+                <div class="footer-col">
+                    <h3>Quick Links</h3>
+                    <ul>
+                        <li><a href="index.html">Home</a></li>
+                        <li><a href="categories.html">Categories</a></li>
+                        <li><a href="services.html">Services</a></li>
+                        <li><a href="about.html">About Us</a></li>
+                        <li><a href="contact.html">Contact</a></li>
+                    </ul>
+                </div>
+                <div class="footer-col">
+                    <h3>Contact Info</h3>
+                    <ul>
+                        <li><i class="fas fa-map-marker-alt"></i> 123 Baker Street, London</li>
+                        <li><i class="fas fa-phone"></i> +44 123 456 7890</li>
+                        <li><i class="fas fa-envelope"></i> info@sweetdelights.com</li>
+                    </ul>
+                </div>
+                <div class="footer-col">
+                    <h3>Opening Hours</h3>
+                    <ul>
+                        <li>Monday - Friday: 8am - 7pm</li>
+                        <li>Saturday: 9am - 8pm</li>
+                        <li>Sunday: 10am - 6pm</li>
+                    </ul>
+                </div>
+            </div>
+            <div class="footer-bottom">
+                <p>© 2025 Sweet Delights. All Rights Reserved.</p>
+            </div>
+        </div>
+    </footer>
+    <script>
+        let cart = [];
+
+        // Add to Cart Functionality with Message
+        document.querySelectorAll('.add-to-cart').forEach(button => {
+            button.addEventListener('click', () => {
+                const name = button.getAttribute('data-name');
+                const price = parseFloat(button.getAttribute('data-price'));
+                const item = { name, price };
+                cart.push(item);
+                updateCart();
+
+                // Show Add to Cart Message
+                const messageDiv = document.getElementById('addToCartMessage');
+                messageDiv.textContent = `${name} has been added to your cart!`;
+                messageDiv.style.display = 'block';
+                setTimeout(() => {
+                    messageDiv.style.display = 'none';
+                }, 3000); // Hide after 3 seconds
+            });
+        });
+
+        // Update Cart Icon, Count, and Total
+        function updateCart() {
+            const cartCount = document.getElementById('cartCount');
+            const cartItems = document.getElementById('cartItems');
+            const cartTotal = document.getElementById('cartTotal');
+            cartCount.textContent = cart.length;
+            cartItems.innerHTML = '';
+
+            if (cart.length === 0) {
+                cartItems.innerHTML = '<p>Your cart is empty.</p>';
+                cartTotal.textContent = '0.00';
+            } else {
+                let total = 0;
+                cart.forEach(item => {
+                    total += item.price;
+                    const div = document.createElement('div');
+                    div.className = 'cart-item';
+                    div.innerHTML = `
+                        <img src="images/cart-placeholder.jpg" alt="Cart Item">
+                        <span>${item.name} - $${item.price.toFixed(2)}</span>
+                        <button class="remove-item" data-name="${item.name}">Remove</button>
+                    `;
+                    cartItems.appendChild(div);
+                });
+
+                cartTotal.textContent = total.toFixed(2);
+
+                // Remove Item Functionality
+                document.querySelectorAll('.remove-item').forEach(button => {
+                    button.addEventListener('click', () => {
+                        const name = button.getAttribute('data-name');
+                        cart = cart.filter(item => item.name !== name);
+                        updateCart();
+                        document.getElementById('cartIcon').click(); // Refresh modal
+                    });
+                });
+            }
+        }
+
+        // Cart Icon Click to Show Modal
+        document.getElementById('cartIcon').addEventListener('click', () => {
+            const modal = document.getElementById('cartModal');
+            modal.style.display = 'block';
+        });
+
+        // Close Modal
+        document.querySelectorAll('#cartModal .modal-content, #cakeModal .modal-content').forEach(content => {
+            content.querySelector('.close-modal')?.addEventListener('click', () => {
+                content.parentElement.style.display = 'none';
+            });
+        });
+
+        // Clear Cart
+        document.getElementById('clearCart').addEventListener('click', () => {
+            cart = [];
+            updateCart();
+            document.getElementById('cartIcon').click(); // Refresh modal
+        });
+
+        // Checkout Functionality with Custom Alert
+        document.getElementById('checkout').addEventListener('click', () => {
+            if (cart.length === 0) {
+                const messageDiv = document.getElementById('checkoutMessage');
+                messageDiv.textContent = 'Your cart is empty!';
+                messageDiv.style.display = 'block';
+                setTimeout(() => {
+                    messageDiv.style.display = 'none';
+                }, 3000);
+            } else {
+                let summary = 'Checkout Summary:\n\n';
+                let total = 0;
+                cart.forEach(item => {
+                    summary += `${item.name} - $${item.price.toFixed(2)}\n`;
+                    total += item.price;
+                });
+                summary += `\nTotal: $${total.toFixed(2)}`;
+
+                const messageDiv = document.getElementById('checkoutMessage');
+                messageDiv.innerHTML = summary.replace(/\n/g, '<br>');
+                messageDiv.style.display = 'block';
+                setTimeout(() => {
+                    messageDiv.style.display = 'none';
+                    cart = []; // Clear cart after checkout
+                    updateCart();
+                    document.getElementById('cartModal').style.display = 'none';
+                }, 5000); // Hide after 5 seconds
+            }
+        });
+
+        // Close Modal on Outside Click
+        window.addEventListener('click', (event) => {
+            if (event.target.id === 'cartModal' || event.target.id === 'cakeModal') {
+                event.target.style.display = 'none';
+            }
+        });
+    </script>
+</body>
+</html>

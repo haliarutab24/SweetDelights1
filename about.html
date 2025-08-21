@@ -1,0 +1,294 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>About Us | Sweet Delights</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+    <link rel="stylesheet" href="css/style.css">
+    <style>
+        /* Hero section styling */
+        .hero.hero-section {
+            position: relative;
+            background-image: url('Images/cover.png'); /* Same image as index.html */
+            background-size: cover;
+            background-position: center;
+            background-repeat: no-repeat;
+            min-height: 80vh; /* Full viewport height */
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: var(--light-color, #fff); /* Fallback to white */
+            text-align: center;
+            padding: 5rem 0;
+            margin-bottom: 2rem;
+            border-radius: 20px;
+            animation: slideUp 1s ease-out;
+        }
+
+        /* Overlay for image opacity effect */
+        .hero.hero-section::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(0, 0, 0, 0.5); /* Dark overlay for readability */
+            border-radius: 20px; /* Match hero section */
+            z-index: 1;
+        }
+
+        /* Ensure content is above overlay */
+        .container {
+            position: relative;
+            z-index: 2;
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 20px;
+        }
+
+        /* Hero content styling */
+        .hero-content {
+            max-width: 600px;
+            text-shadow: 0 2px 4px rgba(0, 0, 0, 0.5); /* Subtle shadow for text */
+        }
+
+        .hero-content h1 {
+            font-size: 2.5rem;
+            margin-bottom: 1rem;
+            line-height: 1.2;
+        }
+
+        .hero-content p {
+            font-size: 1.2rem;
+            margin-bottom: 1.5rem;
+        }
+
+        /* Button styling */
+        .btn {
+            display: inline-block;
+            padding: 10px 20px;
+            background: #ff6347;
+            color: #fff;
+            text-decoration: none;
+            border-radius: 5px;
+            transition: background 0.3s, transform 0.2s;
+        }
+
+        .btn:hover {
+            background: #e5533d;
+            transform: translateY(-2px); /* Subtle lift effect */
+        }
+
+        /* Animation keyframes */
+        @keyframes slideUp {
+            from {
+                opacity: 0;
+                transform: translateY(50px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        /* About sections basic styling (move to style.css if needed) */
+        .about-story, .about-team, .about-mission {
+            padding: 4rem 0;
+            text-align: center;
+        }
+
+        .about-story h2, .about-team h2, .about-mission h2 {
+            font-size: 2rem;
+            margin-bottom: 1rem;
+            color: #333;
+        }
+
+        .about-story p, .about-mission p {
+            max-width: 800px;
+            margin: 0 auto 1.5rem;
+            font-size: 1.1rem;
+            color: #666;
+        }
+
+        .team-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 2rem;
+            margin-top: 2rem;
+        }
+
+        .team-member {
+            background: #fff;
+            padding: 1.5rem;
+            border-radius: 10px;
+            box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+        }
+
+        .team-member img {
+            width: 100%;
+            height: 200px;
+            object-fit: cover;
+            border-radius: 50%;
+            margin-bottom: 1rem;
+        }
+
+        .team-member h3 {
+            font-size: 1.5rem;
+            margin-bottom: 0.5rem;
+            color: #333;
+        }
+
+        .team-member p {
+            font-size: 1rem;
+            color: #666;
+        }
+
+        /* Responsive design */
+        @media (max-width: 768px) {
+            .hero.hero-section {
+                min-height: 60vh;
+                padding: 3rem 0;
+            }
+            .hero-content h1 {
+                font-size: 1.8rem;
+            }
+            .hero-content p {
+                font-size: 1rem;
+            }
+            .hero-content {
+                padding: 0 20px;
+            }
+            .about-story h2, .about-team h2, .about-mission h2 {
+                font-size: 1.8rem;
+            }
+            .team-grid {
+                grid-template-columns: 1fr;
+            }
+        }
+    </style>
+</head>
+<body>
+    <!-- Navigation -->
+    <nav class="navbar">
+        <div class="container">
+            <a href="index.html" class="logo">Sweet<span>Delights</span></a>
+            <ul class="nav-links">
+                <li><a href="index.html">Home</a></li>
+                <li><a href="categories.html">Categories</a></li>
+                <li><a href="services.html">Services</a></li>
+                <li><a href="about.html" class="active">About Us</a></li>
+                <li><a href="contact.html">Contact</a></li>
+                <li><a href="#" class="cart-icon"><i class="fas fa-shopping-cart"></i><span class="cart-count">0</span></a></li>
+            </ul>
+            <div class="hamburger">
+                <span></span>
+                <span></span>
+                <span></span>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Hero Section -->
+    <section class="hero hero-section">
+        <div class="container">
+            <div class="hero-content">
+                <h1>About Sweet Delights</h1>
+                <p>Learn about our passion for crafting delicious, artisan cakes</p>
+                <a href="#about-story" class="btn">Our Story</a>
+            </div>
+        </div>
+    </section>
+
+    <!-- About Story Section -->
+    <section class="about-story" id="about-story">
+        <div class="container">
+            <h2>Our Story</h2>
+            <p>Founded in 2010, Sweet Delights began as a small family bakery with a dream to create unforgettable cakes for every occasion. Over the years, our dedication to quality ingredients, innovative designs, and exceptional customer service has made us a beloved name in London’s dessert scene.</p>
+            <p>From birthday celebrations to weddings, we pour love and creativity into every cake, ensuring each bite is a moment of joy. Our journey is one of passion, craftsmanship, and community, and we’re excited to share it with you.</p>
+        </div>
+    </section>
+
+    <!-- About Team Section -->
+    <section class="about-team">
+        <div class="container">
+            <h2>Meet Our Team</h2>
+            <div class="team-grid">
+                <div class="team-member">
+                    <img src="images/team/chef.jpg" alt="Emma Baker">
+                    <h3>Emma Baker</h3>
+                    <p>Head Baker & Founder</p>
+                </div>
+                <div class="team-member">
+                    <img src="images/team/decorator.jpg" alt="Liam Frost">
+                    <h3>Liam Frost</h3>
+                    <p>Lead Cake Designer</p>
+                </div>
+                <div class="team-member">
+                    <img src="images/team/founder.jpg" alt="Sophie Cream">
+                    <h3>Sophie Cream</h3>
+                    <p>Pastry Chef</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- About Mission Section -->
+    <section class="about-mission">
+        <div class="container">
+            <h2>Our Mission</h2>
+            <p>At Sweet Delights, our mission is to bring joy through exceptional cakes that celebrate life’s special moments. We strive to use the finest ingredients, embrace creativity, and deliver unparalleled service to make every occasion unforgettable.</p>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer>
+        <div class="container">
+            <div class="footer-content">
+                <div class="footer-col">
+                    <h3>Sweet Delights</h3>
+                    <p>Artisan bakery creating beautiful, delicious cakes since 2010.</p>
+                    <div class="social-links">
+                        <a href="#"><i class="fab fa-facebook-f"></i></a>
+                        <a href="#"><i class="fab fa-instagram"></i></a>
+                        <a href="#"><i class="fab fa-twitter"></i></a>
+                        <a href="#"><i class="fab fa-pinterest-p"></i></a>
+                    </div>
+                </div>
+                <div class="footer-col">
+                    <h3>Quick Links</h3>
+                    <ul>
+                        <li><a href="index.html">Home</a></li>
+                        <li><a href="categories.html">Categories</a></li>
+                        <li><a href="services.html">Services</a></li>
+                        <li><a href="about.html">About Us</a></li>
+                        <li><a href="contact.html">Contact</a></li>
+                    </ul>
+                </div>
+                <div class="footer-col">
+                    <h3>Contact Info</h3>
+                    <ul>
+                        <li><i class="fas fa-map-marker-alt"></i> 123 Baker Street, London</li>
+                        <li><i class="fas fa-phone"></i> +44 123 456 7890</li>
+                        <li><i class="fas fa-envelope"></i> info@sweetdelights.com</li>
+                    </ul>
+                </div>
+                <div class="footer-col">
+                    <h3>Opening Hours</h3>
+                    <ul>
+                        <li>Monday - Friday: 8am - 7pm</li>
+                        <li>Saturday: 9am - 8pm</li>
+                        <li>Sunday: 10am - 6pm</li>
+                    </ul>
+                </div>
+            </div>
+            <div class="footer-bottom">
+                <p>© 2023 Sweet Delights. All Rights Reserved.</p>
+            </div>
+        </div>
+    </footer>
+
+    <script src="main.js"></script>
+</body>
+</html>

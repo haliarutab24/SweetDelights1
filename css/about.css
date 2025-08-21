@@ -1,0 +1,314 @@
+/* Our Story */
+.our-story {
+    padding: 60px 0;
+    background: #FFF0F5;
+}
+
+.story-content {
+    display: flex;
+    gap: 30px;
+    align-items: center;
+}
+
+.story-text {
+    flex: 1;
+}
+
+.story-text h2 {
+    font-size: 2.5rem;
+    color: #DB7093;
+    margin-bottom: 20px;
+    text-shadow: 1px 1px 2px rgba(0, 0, 0, 0.1);
+}
+
+.story-text p {
+    color: #333;
+    margin-bottom: 15px;
+    font-size: 1.1rem;
+}
+
+.story-image {
+    flex: 1;
+}
+
+.story-image img {
+    max-width: 100%;
+    border-radius: 15px;
+    box-shadow: 0 6px 12px rgba(0, 0, 0, 0.1);
+}
+
+/* Philosophy */
+.philosophy {
+    padding: 60px 0;
+    background: #FFD1DC;
+}
+
+.philosophy h2 {
+    text-align: center;
+    font-size: 2.5rem;
+    color: #DB7093;
+    margin-bottom: 40px;
+    text-shadow: 1px 1px 2px rgba(0, 0, 0, 0.1);
+}
+
+.philosophy-cards {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+    gap: 20px;
+}
+
+.philosophy-card {
+    background: #FFF0F5;
+    border-radius: 15px;
+    padding: 20px;
+    text-align: center;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    transition: transform 0.3s;
+}
+
+.philosophy-card:hover {
+    transform: translateY(-5px);
+}
+
+.philosophy-card i {
+    font-size: 2.5rem;
+    color: #FF99CC;
+    margin-bottom: 15px;
+}
+
+.philosophy-card h3 {
+    color: #DB7093;
+    margin-bottom: 10px;
+    font-size: 1.5rem;
+}
+
+.philosophy-card p {
+    color: #333;
+    font-size: 1rem;
+}
+
+/* Our Team */
+.our-team {
+    padding: 60px 0;
+    background: #FFF0F5;
+}
+
+.our-team h2 {
+    text-align: center;
+    font-size: 2.5rem;
+    color: #DB7093;
+    margin-bottom: 40px;
+    text-shadow: 1px 1px 2px rgba(0, 0, 0, 0.1);
+}
+
+.team-members {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+    gap: 20px;
+}
+
+.team-member {
+    background: #FFFFFF;
+    border-radius: 15px;
+    padding: 20px;
+    text-align: center;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    transition: transform 0.3s;
+}
+
+.team-member:hover {
+    transform: translateY(-5px);
+}
+
+.team-member img {
+    width: 120px;
+    height: 120px;
+    border-radius: 50%;
+    margin-bottom: 15px;
+    border: 3px solid #FF99CC;
+}
+
+.team-member h3 {
+    color: #DB7093;
+    margin-bottom: 5px;
+    font-size: 1.5rem;
+}
+
+.team-member p {
+    color: #333;
+    margin-bottom: 10px;
+    font-size: 1rem;
+}
+
+.team-member .social-links a {
+    color: #FF99CC;
+    margin: 0 5px;
+    font-size: 1.3rem;
+    transition: color 0.3s;
+}
+
+.team-member .social-links a:hover {
+    color: #DB7093;
+}
+
+/* Awards */
+.awards {
+    padding: 60px 0;
+    background: #FFD1DC;
+    text-align: center;
+}
+
+.awards h2 {
+    font-size: 2.5rem;
+    color: #DB7093;
+    margin-bottom: 40px;
+    text-shadow: 1px 1px 2px rgba(0, 0, 0, 0.1);
+}
+
+.award-logos {
+    display: flex;
+    justify-content: center;
+    gap: 20px;
+    flex-wrap: wrap;
+}
+
+.award-logos img {
+    max-width: 100px;
+    height: auto;
+    filter: drop-shadow(0 2px 4px rgba(0, 0, 0, 0.2));
+}
+
+/* Gallery */
+.gallery {
+    padding: 60px 0;
+    background: #FFF0F5;
+}
+
+.gallery h2 {
+    text-align: center;
+    font-size: 2.5rem;
+    color: #DB7093;
+    margin-bottom: 40px;
+    text-shadow: 1px 1px 2px rgba(0, 0, 0, 0.1);
+}
+
+.gallery-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+    gap: 20px;
+}
+
+.gallery-item {
+    position: relative;
+    cursor: pointer;
+}
+
+.gallery-item img {
+    max-width: 100%;
+    border-radius: 10px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+}
+
+.gallery-item .overlay {
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background: rgba(0, 0, 0, 0.5);
+    opacity: 0;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    border-radius: 10px;
+    transition: opacity 0.3s;
+}
+
+.gallery-item:hover .overlay {
+    opacity: 1;
+}
+
+.gallery-item .overlay i {
+    color: #FFF0F5;
+    font-size: 2rem;
+}
+
+/* Gallery Modal */
+.modal {
+    display: none;
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: rgba(0, 0, 0, 0.8);
+    z-index: 2000;
+    align-items: center;
+    justify-content: center;
+}
+
+.modal-content {
+    max-width: 90%;
+    max-height: 90%;
+    position: relative;
+}
+
+.modal-content img {
+    max-width: 100%;
+    max-height: 80vh;
+    border-radius: 10px;
+    border: 3px solid #FF99CC;
+}
+
+.modal-close, .modal-prev, .modal-next {
+    position: absolute;
+    background: #DB7093;
+    color: #FFF0F5;
+    border: none;
+    padding: 10px;
+    border-radius: 50%;
+    cursor: pointer;
+    font-size: 1.2rem;
+    transition: background 0.3s;
+}
+
+.modal-close:hover, .modal-prev:hover, .modal-next:hover {
+    background: #FF99CC;
+}
+
+.modal-close {
+    top: 10px;
+    right: 10px;
+}
+
+.modal-prev {
+    left: 10px;
+    top: 50%;
+    transform: translateY(-50%);
+}
+
+.modal-next {
+    right: 10px;
+    top: 50%;
+    transform: translateY(-50%);
+}
+
+/* Responsive Design */
+@media (max-width: 768px) {
+    .story-content {
+        flex-direction: column;
+    }
+
+    .story-image {
+        margin-top: 20px;
+    }
+
+    .philosophy-cards, .team-members, .gallery-grid {
+        grid-template-columns: 1fr;
+    }
+
+    .award-logos {
+        flex-direction: column;
+        align-items: center;
+    }
+}
